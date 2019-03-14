@@ -7,7 +7,7 @@ class Alias:
         self.mud = mud
         self._name = name
         self._exec = func
-        mud.register_observer(self)
+        mud.register_input_observer(self)
 
     def notify(self, observable, *args, **kwargs):
         if self._name in kwargs.get('line'):

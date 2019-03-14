@@ -11,14 +11,14 @@ RESPONSE = 1002
 class Mud:
     def __init__(self, telnet):
         self.tn = telnet
-        self.__observers = []
+        self.__input_observers = []
 
-    def register_observer(self, observer):
-        self.__observers.append(observer)
+    def register_input_observer(self, observer):
+        self.__input_observers.append(observer)
 
-    def notify_observers(self, *args, **kwargs):
+    def notify_input_observers(self, *args, **kwargs):
         responses = []
-        for observer in self.__observers:
+        for observer in self.__input_observers:
             responses.append(observer.notify(self, *args, **kwargs))
         return responses
 
@@ -49,7 +49,7 @@ class Mud:
     # Both the send and receive texts are subject to observation
     def send(self, line):
         # Determine if user is manually triggering an action
-        if True not in self.notify_observers(line=line.decode()):
+        if True not in self.notify_input_observers(line=line.decode()):
             self.tn.write(line)
 
     def receive(self, text):
