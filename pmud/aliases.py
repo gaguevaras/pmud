@@ -1,9 +1,12 @@
 class Alias:
 
-    def __init__(self, mud, name, executable):
+    def __init__(self, mud, name, func):
+        """
+            Initialize and register an alias
+        """
         self.mud = mud
         self._name = name
-        self._exec = executable
+        self._exec = func
         mud.register_observer(self)
 
     def notify(self, observable, *args, **kwargs):
