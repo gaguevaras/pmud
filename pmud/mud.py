@@ -1,7 +1,7 @@
 import selectors
 import telnetlib
-
 import sys
+import re
 
 
 REQUEST = 1001
@@ -64,7 +64,10 @@ class Mud:
 
     def receive(self, text):
         # Determine if text triggers any actions
-        
+        self.notify_output_observers(line=self.strip_ansi(text.decode('ascii')))
         sys.stdout.write(text.decode('ascii'))
         sys.stdout.flush()
 
+    def strip_ansi(self, line):
+        return re.sub(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]', '', line)
+    

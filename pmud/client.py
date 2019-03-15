@@ -2,6 +2,7 @@
 import telnetlib
 import argparse
 from aliases import alias_list, Alias
+from triggers import trigger_list, Trigger
 from mud import Mud
 
 parser = argparse.ArgumentParser(description='GBLabs MUD client.')
@@ -19,6 +20,9 @@ mud = Mud(tn)
 
 for alias in alias_list:
     Alias(mud, alias['name'], alias['func'])
+
+for trigger in trigger_list:
+    Trigger(mud, trigger['name'], trigger['func'])
 
 mud.mud_interact()
 

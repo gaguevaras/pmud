@@ -18,7 +18,30 @@ class Alias:
 
 
 def spellup(mud):
-    mud.tn.write('say hi\n'.encode())
+    # These are particular to the current player file I'm using.
+    spells = [
+        "chance",
+        "anticipate",
+        "fate",
+        "spring",
+        "'aura shield'",
+        "'auroryle shield'",
+        "infravision",
+        "levitate",
+        "haste",
+        "'detect invis'",
+        "armor",
+        "pass",
+        "giant",
+        "invis",
+        "shield",
+        "'advanced shield'",
+        "mystify",
+        "blaze shield",
+        "foresight"	
+    ]
+    for spell in spells:            
+        mud.tn.write('c {}\n'.format(spell).encode())
     return True
 
 
@@ -40,12 +63,6 @@ def map_area(mud):
     how to interact with the mud.
 """
 alias_list = [
-    {
-        'name': 'spellup',
-        'func': spellup
-    },
-    {
-        'name': 'map_area',
-        'func': map_area
-    }
+    { 'name': 'spellup', 'func': spellup },
+    { 'name': 'map_area', 'func': map_area }
 ]
