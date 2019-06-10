@@ -64,9 +64,10 @@ class Mud:
 
     def receive(self, text):
         # Determine if text triggers any actions
-        self.notify_output_observers(line=self.strip_ansi(text.decode('ascii')))
-        sys.stdout.write(text.decode('ascii'))
+        recv_line = text.decode('ascii')
+        sys.stdout.write(recv_line)
         sys.stdout.flush()
+        self.notify_output_observers(line=self.strip_ansi(recv_line))
 
     def strip_ansi(self, line):
         return re.sub(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]', '', line)
